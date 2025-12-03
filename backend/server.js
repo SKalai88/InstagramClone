@@ -1,6 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();  // ← VERY IMPORTANT
 
 const app = express();
 app.use(cors());
@@ -8,7 +11,7 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/instagram")
+  .connect(process.env.MONGO_URL)    // ← using .env variable
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
@@ -22,8 +25,7 @@ app.get("/users", async (req, res) => {
   res.json(users);
 });
 
-// Get a particular user by ID
-
+// Get user by ID
 app.get("/users/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -42,8 +44,6 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
-
-
-
-
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(process.env.PORT, () =>
+  console.log(`Server running on port ${process.env.PORT}`)
+);
