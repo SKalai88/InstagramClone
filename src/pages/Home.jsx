@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import StoryCard from "../components/StoryCard";
-import Suggestions from "../components/suggestions";
+import Suggestions from "../components/Suggestions";
 import axios from "axios";
 import Feeds from "../components/Feeds";
 
