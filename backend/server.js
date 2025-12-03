@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
-dotenv.config();  // ← VERY IMPORTANT
+dotenv.config(); // Load .env
 
 const app = express();
 app.use(cors());
@@ -11,15 +11,15 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose
-  .connect(process.env.MONGO_URL)    // ← using .env variable
+  .connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
-// User Schema
+// Schema
 const userSchema = new mongoose.Schema({}, { strict: false });
 const User = mongoose.model("User", userSchema);
 
-// API route
+// Get all users
 app.get("/users", async (req, res) => {
   const users = await User.find();
   res.json(users);
@@ -44,6 +44,7 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, () =>
-  console.log(`Server running on port ${process.env.PORT}`)
-);
+// ❌ REMOVE app.listen()
+// Vercel runs its own server
+
+export default app; // ✅ REQUIRED FOR VERCEL
