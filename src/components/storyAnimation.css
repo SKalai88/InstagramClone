@@ -1,0 +1,18 @@
+.centerStory {
+  transition: transform 0.45s ease, opacity 0.45s ease;
+}
+
+.from-left {
+  transform: translateX(-120%) scale(0.7);
+  opacity: 0;
+}
+
+.from-right {
+  transform: translateX(120%) scale(0.7);
+  opacity: 0;
+}
+
+.center {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
